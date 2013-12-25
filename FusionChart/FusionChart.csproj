@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E63063DE-95CA-491B-9261-12CC2EFDAADA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FusionChart</RootNamespace>
+    <AssemblyName>FusionChart</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\FactoryDB.mdb" />
+    <Content Include="App_Data\MS_SQL_Script.sql" />
+    <Content Include="ArrayExample\Combination.aspx" />
+    <Content Include="ArrayExample\MultiSeries.aspx" />
+    <Content Include="ArrayExample\SingleSeries.aspx" />
+    <Content Include="ArrayExample\Stacked.aspx" />
+    <Content Include="assets\ui\css\style.css" />
+    <Content Include="assets\ui\images\back2home-button.jpg" />
+    <Content Include="assets\ui\images\button-qua-left.jpg" />
+    <Content Include="assets\ui\images\button-qua-right.jpg" />
+    <Content Include="assets\ui\images\content-area-bg.jpg" />
+    <Content Include="assets\ui\images\doc-landing-page-bg.jpg" />
+    <Content Include="assets\ui\images\doc-landing-page-header-bg.jpg" />
+    <Content Include="assets\ui\images\expandable-panel-left.jpg" />
+    <Content Include="assets\ui\images\expandable-panel-middle.jpg" />
+    <Content Include="assets\ui\images\expandable-panel-right.jpg" />
+    <Content Include="assets\ui\images\fusionchartsv3.2-logo.png" />
+    <Content Include="assets\ui\images\sec-list-arr.jpg" />
+    <Content Include="assets\ui\js\DD_belatedPNG_0.0.8a-min.js" />
+    <Content Include="assets\ui\js\jquery-1.4.2.min.js" />
+    <Content Include="assets\ui\js\lib.js" />
+    <Content Include="BasicExample\BasicChart.aspx" />
+    <Content Include="BasicExample\BasicDataXML.aspx" />
+    <Content Include="BasicExample\DataStrJSON.aspx" />
+    <Content Include="BasicExample\dataXML.aspx" />
+    <Content Include="BasicExample\Data\Data.xml" />
+    <Content Include="BasicExample\Data\TransparentData.xml" />
+    <Content Include="BasicExample\ManagedPrint.aspx" />
+    <Content Include="BasicExample\MultiChart.aspx" />
+    <Content Include="BasicExample\MultiChartsJS.aspx" />
+    <Content Include="BasicExample\SimpleChart.aspx" />
+    <Content Include="BasicExample\SimpleChartJSON.aspx" />
+    <Content Include="BasicExample\TransparentChart.aspx" />
+    <Content Include="bin\FusionCharts.dll" />
+    <Content Include="bin\FusionCharts.XML" />
+    <Content Include="DBExample\BasicDBExample.aspx" />
+    <Content Include="DBExample\Default.aspx" />
+    <Content Include="DBExample\Detailed.aspx" />
+    <Content Include="DBExample\MSCharts.aspx" />
+    <Content Include="DB_dataURL\Default.aspx" />
+    <Content Include="DB_dataURL\PieData.aspx" />
+    <Content Include="DB_DrillDown\Default.aspx" />
+    <Content Include="DB_DrillDown\Detailed.aspx" />
+    <Content Include="DB_JS\Default.aspx" />
+    <Content Include="DB_JS_dataURL\Default.aspx" />
+    <Content Include="DB_JS_dataURL\FactoryData.aspx" />
+    <Content Include="DB_JS_dataURL\LinkedSimple.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="Export\Automated.aspx" />
+    <Content Include="Export\Data\DownloadData.xml" />
+    <Content Include="Export\Data\SaveData.xml" />
+    <Content Include="Export\Download.aspx" />
+    <Content Include="Export\MultipleCharts.aspx" />
+    <Content Include="Export\Save.aspx" />
+    <Content Include="Export_Handler\ASP_Net\FusionCharts.jpg" />
+    <Content Include="Export_Handler\ASP_Net\FusionCharts.png" />
+    <Content Include="Export_Handler\ASP_Net\FusionCharts_eae68d67-18f9-4226-9a9d-99c29716cd48_2707201015192042.jpg" />
+    <Content Include="Export_Handler\FCExporter.aspx" />
+    <Content Include="FormBased\Chart.aspx" />
+    <Content Include="FormBased\Default.aspx" />
+    <Content Include="FusionCharts\Area2D.swf" />
+    <Content Include="FusionCharts\Column2D.swf" />
+    <Content Include="FusionCharts\Column3D.swf" />
+    <Content Include="FusionCharts\FCExporter.swf" />
+    <Content Include="FusionCharts\firebug-lite.js" />
+    <Content Include="FusionCharts\FusionCharts.js" />
+    <Content Include="FusionCharts\FusionChartsExportComponent.js" />
+    <Content Include="FusionCharts\highcharts.js" />
+    <Content Include="FusionCharts\jquery.min.js" />
+    <Content Include="FusionCharts\Line.swf" />
+    <Content Include="FusionCharts\MSColumn3D.swf" />
+    <Content Include="FusionCharts\MSColumn3DLineDY.swf" />
+    <Content Include="FusionCharts\MSCombi3D.swf" />
+    <Content Include="FusionCharts\MSLine.swf" />
+    <Content Include="FusionCharts\Pie3D.swf" />
+    <Content Include="FusionCharts\SSGrid.swf" />
+    <Content Include="FusionCharts\StackedColumn3D.swf" />
+    <Content Include="MasterPage_Example\Data\Data.xml" />
+    <Content Include="MasterPage_Example\Default.aspx" />
+    <Content Include="NoChart.html" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="UpdatePanel.Readme.txt" />
+    <Content Include="UpdatePanel\Images\loading.gif" />
+    <Content Include="UpdatePanel\Sample1.aspx" />
+    <Content Include="UpdatePanel\Sample2.aspx" />
+    <Content Include="UTF8Examples\Database.aspx" />
+    <Content Include="UTF8Examples\DataURL.aspx" />
+    <Content Include="UTF8Examples\DataXML.aspx" />
+    <Content Include="UTF8Examples\Data\Data.xml" />
+    <Content Include="UTF8Examples\GetXMLFromDatabase.aspx" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\DbConn.cs" />
+    <Compile Include="ArrayExample\Combination.aspx.cs">
+      <DependentUpon>Combination.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArrayExample\MultiSeries.aspx.cs">
+      <DependentUpon>MultiSeries.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArrayExample\SingleSeries.aspx.cs">
+      <DependentUpon>SingleSeries.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArrayExample\Stacked.aspx.cs">
+      <DependentUpon>Stacked.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasicExample\BasicChart.aspx.cs">
+      <DependentUpon>BasicChart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasicExample\BasicDataXML.aspx.cs">
+      <DependentUpon>BasicDataXML.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasicExample\DataStrJSON.aspx.cs">
+      <DependentUpon>DataStrJSON.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasicExample\dataXML.aspx.cs">
+      <DependentUpon>dataXML.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasicExample\ManagedPrint.aspx.cs">
+      <DependentUpon>ManagedPrint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasicExample\MultiChart.aspx.cs">
+      <DependentUpon>MultiChart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasicExample\MultiChartsJS.aspx.cs">
+      <DependentUpon>MultiChartsJS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasicExample\SimpleChart.aspx.cs">
+      <DependentUpon>SimpleChart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasicExample\SimpleChartJSON.aspx.cs">
+      <DependentUpon>SimpleChartJSON.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasicExample\TransparentChart.aspx.cs">
+      <DependentUpon>TransparentChart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DBExample\BasicDBExample.aspx.cs">
+      <DependentUpon>BasicDBExample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DBExample\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DBExample\Detailed.aspx.cs">
+      <DependentUpon>Detailed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DBExample\MSCharts.aspx.cs">
+      <DependentUpon>MSCharts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DB_dataURL\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DB_dataURL\PieData.aspx.cs">
+      <DependentUpon>PieData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DB_DrillDown\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DB_DrillDown\Detailed.aspx.cs">
+      <DependentUpon>Detailed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DB_JS\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DB_JS_dataURL\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DB_JS_dataURL\FactoryData.aspx.cs">
+      <DependentUpon>FactoryData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DB_JS_dataURL\LinkedSimple.aspx.cs">
+      <DependentUpon>LinkedSimple.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Export\Automated.aspx.cs">
+      <DependentUpon>Automated.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\Download.aspx.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\MultipleCharts.aspx.cs">
+      <DependentUpon>MultipleCharts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export\Save.aspx.cs">
+      <DependentUpon>Save.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export_Handler\FCExporter.aspx.cs">
+      <DependentUpon>FCExporter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormBased\Chart.aspx.cs">
+      <DependentUpon>Chart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormBased\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage_Example\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\FusionCharts.cs" />
+    <Compile Include="UpdatePanel\Sample1.aspx.cs">
+      <DependentUpon>Sample1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdatePanel\Sample2.aspx.cs">
+      <DependentUpon>Sample2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UTF8Examples\Database.aspx.cs">
+      <DependentUpon>Database.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UTF8Examples\DataURL.aspx.cs">
+      <DependentUpon>DataURL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UTF8Examples\DataXML.aspx.cs">
+      <DependentUpon>DataXML.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UTF8Examples\GetXMLFromDatabase.aspx.cs">
+      <DependentUpon>GetXMLFromDatabase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Export\Exported_Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BasicExample\Data\Data.json" />
+    <None Include="Export_Handler\ASP_Net\FusionCharts.pdf" />
+    <Content Include="MasterPage_Example\MasterPage.master" />
+    <None Include="Web.config.ajax" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3146</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DS_EMP" targetNamespace="http://tempuri.org/DS_EMP.xsd" xmlns:mstns="http://tempuri.org/DS_EMP.xsd" xmlns="http://tempuri.org/DS_EMP.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DS_EMP" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DS_EMP" msprop:Generator_UserDSName="DS_EMP">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="T_EMP" msprop:Generator_TableClassName="T_EMPDataTable" msprop:Generator_TableVarName="tableT_EMP" msprop:Generator_TablePropName="T_EMP" msprop:Generator_RowDeletingName="T_EMPRowDeleting" msprop:Generator_UserTableName="T_EMP" msprop:Generator_RowChangingName="T_EMPRowChanging" msprop:Generator_RowEvHandlerName="T_EMPRowChangeEventHandler" msprop:Generator_RowDeletedName="T_EMPRowDeleted" msprop:Generator_RowEvArgName="T_EMPRowChangeEvent" msprop:Generator_RowChangedName="T_EMPRowChanged" msprop:Generator_RowClassName="T_EMPRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EMPNO" msprop:Generator_ColumnVarNameInTable="columnEMPNO" msprop:Generator_ColumnPropNameInRow="EMPNO" msprop:Generator_ColumnPropNameInTable="EMPNOColumn" msprop:Generator_UserColumnName="EMPNO" type="xs:string" minOccurs="0" />
+              <xs:element name="EMPName" msprop:Generator_ColumnVarNameInTable="columnEMPName" msprop:Generator_ColumnPropNameInRow="EMPName" msprop:Generator_ColumnPropNameInTable="EMPNameColumn" msprop:Generator_UserColumnName="EMPName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

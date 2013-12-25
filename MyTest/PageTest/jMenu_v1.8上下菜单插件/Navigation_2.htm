@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+         <style type="text/css">
+        /* CSS Reset */
+        h1, h2, h3, h4, p, li, li a
+        {
+            font-family: Arial, Sans-Serif;
+            font-size: 15px;
+            font-weight: bold;
+            color: #525252;
+            text-decoration: none;
+        }
+        
+        h1, h2, h3, h4
+        {
+            font-size: 22px;
+        }
+        
+        /* The Nav styling starts here, The above code is just to make the page look nice */
+        #dropdown_nav
+        {
+            width: 960px;
+            padding: 0px;
+            display: inline-block;
+            list-style: none;
+            -moz-box-shadow: inset 0px 0px 1px #fff;
+            -webkit-box-shadow: inset 0px 0px 1px #fff;
+            border: 1px solid #ccc;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            background: #e2e2e2;
+            background: -moz-linear-gradient(#f3f3f3, #e2e2e2);
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#f3f3f3), to(#e2e2e2));
+        }
+        
+        #dropdown_nav li
+        {
+            padding: 10px 0px 10px 0px;
+            float: left;
+            position: relative;
+            display: inline-block;
+        }
+        
+        #dropdown_nav li a
+        {
+            padding: 10px 15px 10px 15px;
+            -moz-box-shadow: inset 0px 0px 1px #fff;
+            -webkit-box-shadow: inset 0px 0px 1px #fff;
+            border-right: 1px solid #ccc;
+        }
+        #dropdown_nav li:hover ul
+        {
+            visibility:visible;
+            }
+        #dropdown_nav li a:hover
+        {
+            background: #f9f9f9;
+            background: -moz-linear-gradient(#f9f9f9, #e8e8e8);
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#f9f9f9), to(#e8e8e8));
+        }
+        #dropdown_nav li a:active
+        {
+            background: #e2e2e2;
+            background: -moz-linear-gradient(#e2e2e2, #f3f3f3);
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#e2e2e2), to(#f3f3f3));
+        }
+        
+        #dropdown_nav li a.first
+        {
+            -moz-border-radius: 5px 0px 0px 5px;
+            -webkit-border-radius: 5px 0px 0px 5px;
+        }
+        #dropdown_nav .sub_nav
+        {
+            width: 160px;
+            padding: 0px;
+            position: absolute;
+            top: 38px;
+            left: 0px;
+            border: 1px solid #ccc;
+            background: #e2e2e2;
+            visibility:hidden;
+        }
+        
+        #dropdown_nav .sub_nav li
+        {
+            width: 160px;
+            padding: 0px;
+        }
+        
+        #dropdown_nav .sub_nav li a
+        {
+            display: block;
+            border-bottom: 1px solid #ccc;
+            background: -moz-linear-gradient(#f3f3f3, #e2e2e2);
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#f3f3f3), to(#e2e2e2));
+        }
+        #dropdown_nav .sub_nav li a:hover
+        {
+            background: #f9f9f9;
+            background: -moz-linear-gradient(#f9f9f9, #e8e8e8);
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#f9f9f9), to(#e8e8e8));
+        }
+        #dropdown_nav .sub_nav li a:active
+        {
+            background: #e2e2e2;
+            background: -moz-linear-gradient(#e2e2e2, #f3f3f3);
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#e2e2e2), to(#f3f3f3));
+        }
+    </style>
+</head>
+<body>
+  <div id="header">
+        <ul id="dropdown_nav">
+            <li><a class="first" href="#">首页</a></li>
+            <li><a href="#">菜单一</a>
+                <ul class="sub_nav">
+                    <li><a href="#">菜单一 #1</a></li>
+                    <li><a href="#">菜单一 #2</a></li>
+                    <li><a href="#">菜单一 #3</a></li>
+                    <li><a href="#">菜单一 #4</a></li>
+                </ul>
+            </li>
+            <li><a href="#">菜单二</a>
+                <ul class="sub_nav">
+                    <li><a href="#">菜单二 #1</a></li>
+                    <li><a href="#">菜单二 #2</a></li>
+                    <li><a href="#">菜单二 #3</a></li>
+                    <li><a href="#">菜单二 #4</a></li>
+                </ul>
+            </li>
+             <li><a class="last" href="#">菜单三</a>
+                <ul class="sub_nav">
+                    <li><a href="#">菜单三 #1</a></li>
+                    <li><a href="#">菜单三 #2</a></li>
+                    <li><a href="#">菜单三 #3</a></li>
+                    <li><a href="#">菜单三 #4</a></li>
+                </ul>
+            </li>
+            <li><a class="last" href="#">菜单四</a>
+                <ul class="sub_nav">
+                    <li><a href="#">菜单四 #1</a></li>
+                    <li><a href="#">菜单四 #2</a></li>
+                    <li><a href="#">菜单四 #3</a></li>
+                    <li><a href="#">菜单四 #4</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

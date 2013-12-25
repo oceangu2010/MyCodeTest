@@ -1,0 +1,27 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="JsonUrl2.aspx.cs" Inherits="MyTest.PageTest.Json.JsonUrl2" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script type="text/jscript">
+        window.onload = function ()
+        {
+            var val = document.getElementById("hidJson").value;
+            var objJson = eval('(' + val + ')');
+            alert(objJson.Name);
+        }
+    
+        </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+     <input id="hidJson" type="hidden" runat="server" />
+
+    <div>
+    
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,698 @@
+﻿说明：
+1、在未作任何说明的情况下，以下用到的db变量都是DataContext的实例对象，声明语法类似如下：
+using (BP_DataClassesDataContext db = new BP_DataClassesDataContext(ConnectionStrings.GetInstance("ZJ").Con))
+
+{
+
+    //Code
+
+}
+
+2、默认q为Iqueryable类型变量
+ 
+
+ 
+
+简单查询：
+var q = from p in db.view_PreTestResultAuditList
+
+           select p;
+
+简单条件查询：
+方式一：直接使用where关键字
+var q = from c in db.view_PrTestList
+
+           where c.FTestmanID.Equals(UserContext.CurrentUser.FID)
+
+           select c;
+
+方式二：使用lambda 表达式
+var q = db.TOriInfoAutoMemory.Where(c => c.FSampleName == sampleName);
+
+ 
+
+使用 &&和|| 带代替And或Or关键字：
+var entity = db.TSampleOriginalInfo.FirstOrDefault(c => c.FFromID.Equals(fromID) && c.FSampleID.Equals(sampleID));
+
+ 
+
+like模糊条件查询：
+//使用C#中的Contains关键字代替SQL中的like关键字 
+q = q.Where(c => c.FTaskCode.Contains(condition.Name));
+
+ 
+
+In包含查询：
+/// <param name="certificateIDs"> string[] </param>
+
+var certi = (from c in db.TMSCertificate
+
+                 where certificateIDs.ToList().Contains(c.FID.ToString())
+
+                 select c).ToList();
+
+等价于：select * from TMSCertificate where FID in  /* certificateIDs */
+
+ 
+
+Skip和Take实现分页查询：
+var q = from c in db.view_PrTestList
+
+           where c.FTestmanID.Equals(UserContext.CurrentUser.FID)
+
+           select c;
+
+twi.data = (q.Skip(paging.startIndex).Take(paging.pageSize)).ToList();
+//其中startIndex：跳过的系列中指定的条数
+// pageSize：每页显示条数（记录数）
+ 
+
+Distinct方法去除重复：
+var p = (from c in dc.TSampleOriginalInfo
+
+           where sampleIDs.Contains(c.FSampleID.ToString())
+
+           select new
+
+           {
+
+                c.FFromID,
+
+                c.FName
+
+           }).Distinct();
+
+ 
+
+ 
+
+查询指定列使new构造集合：
+var p = (from c in dc.TSampleOriginalInfo
+
+           where sampleIDs.Contains(c.FSampleID.ToString())
+
+           select new
+
+           {
+
+                c.FFromID,
+
+                c.FName
+
+           }).Distinct();
+
+ 
+
+join连接查询：详见下面的【join查询实例】
+//此处省略……
+
+ 
+
+ 
+
+FirstOrDefault查询满足条件的第一条记录或不存在是返回null，不发生异常：
+foreach (var fromID in fromIDs)
+
+{
+
+     var entity = db.TSampleOriginalInfo.FirstOrDefault(c => c.FFromID.Equals(fromID) && c.FSampleID.Equals(sampleID));
+
+     if (entity != null)
+
+     {
+
+          entities.Add(entity);
+
+      }
+
+}
+ 
+
+LINQ to SQL 的重要方法：SubmitChanges方法：
+无论您对对象做了多少项更改，都只是在更改内存中的副本。您并未对数据库中的实际数据做任何更改。直到您对 DataContext 显式调用 SubmitChanges方法，您所做的更改才会传输到服务器。 
+db.SubmitChanges();
+
+新增/删除/修改后都需要显式的调用该方法！
+ 
+
+以下是几个完整的示例：
+        /// <summary>
+
+        /// 添加
+        /// </summary>
+
+        /// <param name="varCustomer">要添加的对象</param>
+
+        /// <returns></returns>
+
+        public bool New(TTrademark idc)
+
+        {
+
+            using (CP_DataClassesDataContext db = new CP_DataClassesDataContext(GS.MODEL.ConnectionStrings.GetInstance("ZJ").Con))
+
+            {
+
+                if (idc != null)
+
+                {
+
+                    db.TTrademark.InsertOnSubmit(idc);
+
+                    db.SubmitChanges();
+
+                    return true;
+
+                }
+
+                else
+
+                {
+
+                    return false;
+
+                }
+
+            }
+
+        }
+       /// <summary>
+
+       /// 新增多个【使用InsertAllOnSubmit】
+       /// </summary>
+
+       /// <param name="model"></param>
+
+       public void New(GS.MODEL.TItem model)
+
+       {
+
+           using (CP_DataClassesDataContext db = new CP_DataClassesDataContext(GS.MODEL.ConnectionStrings.GetInstance("ZJ").Con))
+
+           {
+
+               List<GS.MODEL.TItem> entities = new List<GS.MODEL.TItem>();
+
+               GS.MODEL.TItem entity = new GS.MODEL.TItem()
+
+               {
+
+                   FID = Guid.NewGuid(),
+
+                   FName =model.FName ,
+
+                   FParentName = model.FParentName,
+
+                   FFastCode = model.FFastCode,
+
+                   FRemark=model.FRemark,
+
+                   FSort=model.FSort
+
+               };
+
+               entities.Add(entity);
+
+               db.TItem.InsertAllOnSubmit(entities);
+
+               db.SubmitChanges();
+
+           }
+
+       }
+ 
+
+ 
+
+       /// <summary>
+
+       /// 修改
+       /// </summary>
+
+       /// <param name="model"></param>
+
+       public void Edit(GS.MODEL.TItem model)
+
+       {
+
+          using(CP_DataClassesDataContext db=new CP_DataClassesDataContext(GS.MODEL.ConnectionStrings.GetInstance("ZJ").Con))
+
+          {
+
+              GS.MODEL.TItem items = db.TItem.Single(c => c.FID == model.FID);
+
+              items.FName = model.FName;
+
+              items.FParentName = model.FParentName;
+
+              items.FRemark = model.FRemark;
+
+              items.FSort = model.FSort;
+
+              items.FFastCode = model.FFastCode;
+
+              db.SubmitChanges();
+
+          }
+
+       }
+ 
+
+       /// <summary>
+
+       /// 删除
+       /// </summary>
+
+       /// <param name="IDs"></param>
+
+       public void Delete(string[] ids)
+
+       {
+
+           using (CP_DataClassesDataContext db = new CP_DataClassesDataContext(GS.MODEL.ConnectionStrings.GetInstance("ZJ").Con))
+
+           {
+
+               List<GS.MODEL.TItem> entities = new List<GS.MODEL.TItem>();
+
+               foreach (var id in ids)
+
+               {
+
+                   var entity = db.TItem.FirstOrDefault(c => c.FID.Equals(id));
+
+                       if (entity != null)
+
+                       {
+
+                           entities.Add(entity);
+
+                       }
+
+               }
+
+               db.TItem.DeleteAllOnSubmit(entities);
+
+               db.SubmitChanges();
+
+           }
+
+       }
+ 
+
+ 
+
+        /// <summary>
+
+        /// 【简单查询】获取指定计量标准考核证书下的计量标准器/检定规程/主要配套设备
+        /// </summary>
+
+        /// <param name="certifiacteID"></param>
+
+        /// <returns></returns>
+
+        public IList<view_CertificateOriginalInfo> GetViewByCertificateID(Guid certifiacteID)
+
+        {
+
+            using (BPDataContext db = new BPDataContext(TCTC_ConnectionStrings.connStrJL))
+
+            {
+
+                var d = from c in db.view_CertificateOriginalInfo
+
+                        where c.FCertificateID == certifiacteID
+
+                        select c;
+
+                return d.ToList();
+
+            }
+
+        }
+ 
+
+ 
+
+        /// <summary>
+
+        /// 【综合查询】我的待检测结果任务单
+        /// </summary>
+
+        /// <param name="paging"></param>
+
+        /// <param name="condition"></param>
+
+        /// <returns></returns>
+
+        public TwiReturn GetMyWorkList(PagingCondition paging, ConditionModel condition)
+
+        {
+
+            TwiReturn twi = new TwiReturn();
+
+            using (BP_DataClassesDataContext db = new BP_DataClassesDataContext(ConnectionStrings.GetInstance("ZJ").Con))
+
+            {
+
+                var q = from c in db.view_PrTestList
+
+                        where c.FTestmanID.Equals(UserContext.CurrentUser.FID)
+
+                        select c;
+
+                if (condition != null)
+
+                {
+
+                    if (condition.NameSign == "TaskCode" && condition.Name != "")
+
+                    {
+
+                        q = q.Where(c => c.FTaskCode.Contains(condition.Name));
+
+                    }
+
+                    else if (condition.NameSign == "TestItemName" && condition.Name != "")
+
+                    {
+
+                        q = q.Where(c => c.FTestItemName.Contains(condition.Name));
+
+                    }
+
+                }
+
+                twi.totalCount = q.Count();
+
+                if (paging.needPaging)
+
+                {
+
+                    twi.data = (q.Skip(paging.startIndex).Take(paging.pageSize)).ToList();
+
+                }
+
+                else
+
+                {
+
+                    twi.data = q.ToList();
+
+                }
+
+                return twi;
+
+            }
+
+        }
+
+ 
+
+ 
+
+        /// <summary>
+
+        /// 选择计量标准考核证书
+        /// </summary>
+
+        /// <param name="sampleIDs"></param>
+
+        /// <param name="certificateIDs"></param>
+
+        public void SelectCertificate(string[] sampleIDs, string[] certificateIDs)
+
+        {
+
+            BPDataContext bpDC = new BPDataContext(TCTC_ConnectionStrings.connStrJL);
+
+            CPDataContext cpDc = new CPDataContext(TCTC_ConnectionStrings.connStrJL);
+
+            var certi = (from c in cpDc.TMSCertificate
+
+                         where certificateIDs.ToList().Contains(c.FID.ToString())
+
+                         select c).ToList();
+
+            List<TSampleOriginalInfo> entities = new List<TSampleOriginalInfo>();
+
+            foreach (var sampleID in sampleIDs)
+
+            {
+
+                foreach (var c in certi)
+
+                {
+
+                    TSampleOriginalInfo entity = new TSampleOriginalInfo()
+
+                    {
+
+                        FID = Guid.NewGuid(),
+
+                        FFromID = c.FID,
+
+                        FType = 1,
+
+                        FSampleID = new Guid(sampleID),
+
+                        FName = c.FCertificateName,
+
+                        FCode = c.FCode,
+
+                        FRange = c.FMeasurementRange,
+
+                        FUncertainty = c.FLevel,
+
+                        FCertificateNo = c.FCode,//c.FNumber,zjw修改
+                        FValidDateTo = c.FPeriodDate
+
+                    };
+
+                    entities.Add(entity);
+
+                }
+
+            }
+
+            bpDC.TSampleOriginalInfo.InsertAllOnSubmit(entities);
+
+            bpDC.SubmitChanges();
+
+            bpDC.Dispose();
+
+            cpDc.Dispose();
+
+        }
+
+ 
+
+ 
+
+        /// <summary>
+
+        /// 获取样品之标准/计量标准器/主要配套设备/检定规程
+        /// </summary>
+
+        /// <param name="sampleIDs"></param>
+
+        /// <returns></returns>
+
+        public DataTable GetBySampleIDs(List<string> sampleIDs)
+
+        {
+
+            using (BPDataContext dc = new BPDataContext(TCTC_ConnectionStrings.connStrJL))
+
+            {
+
+                var p = (from c in dc.TSampleOriginalInfo
+
+                         where sampleIDs.Contains(c.FSampleID.ToString())
+
+                         select new
+
+                         {
+
+                             c.FFromID,
+
+                             c.FType,
+
+                             c.FName,
+
+                             c.FCode,
+
+                             c.FRange,
+
+                             c.FModel,
+
+                             c.FUncertainty,
+
+                             c.FCertificateNo,
+
+                             c.FValidDateTo,
+
+                             c.FManufacturer
+
+                         }).Distinct();
+
+                return LinqToDataTable.ToDataTable(p.ToList());
+
+            }
+
+        }
+
+ 
+
+ 
+
+        /// <summary>
+
+        /// 【join查询实例】获取带检测的器具信息
+        /// </summary>
+
+        /// <returns></returns>
+
+        public DataTable GetBySampleName(string sampleName)
+
+        {
+
+            using (BPDataContext dc = new BPDataContext(TCTC_ConnectionStrings.connStrJL))
+
+            {
+
+                var sample = from c in dc.view_Sample_WithVCItem
+
+                           where c.FEndTag == 1 && c.FTaskEndTag == 1 && c.FOutSourcingTag == 0 && c.FAssignTag == 1 && c.FTestCompleteTag == 0 && c.FIsOuter == "否" 
+
+                           select c;
+
+                var r = from s in sample
+
+                        join v in dc.view_GetSampleLeastOrginalRecord
+
+                        on s.FID equals v.FSampleID into recs
+
+                        from v in recs.DefaultIfEmpty()
+
+                        join t in dc.TTask
+
+                        on s.FTaskID equals t.FID into ts
+
+                        from t in ts
+
+                        where (sampleName == "" ? true : s.FName == sampleName) && (s.FReceiverID == UserContext.CurrentUser.FID || TCTC_ConnectionStrings.TestResultFilterByTester == "0")
+
+                        orderby s.FName, t.FCode, s.FCode
+
+                        select new
+
+                        {
+
+                            SampleID = s.FID,
+
+                            SampleCode = s.FCode,
+
+                            s.FName,
+
+                            s.FAnotherName,
+
+                            s.FTaskID,
+
+                            s.FIsRepair,
+
+                            s.FIsNeedOriginalRecord,
+
+                            s.FTestProperty,
+
+                            s.FRepairTag,
+
+                            s.VCItemID,
+
+                            s.CertiID,
+
+                            s.CertiName,
+
+                            s.TechID,
+
+                            s.TechName,
+
+                            s.TechCode,
+
+                            s.FReTestTag,
+
+                            s.FReTestFromTag,       
+
+                            v.FNumber,
+
+                            v.FFileName,
+
+                            v.FCertificateNo,
+
+                            v.FOriginalRecordID,
+
+                            v.FTag,
+
+                            TaskCode = t.FCode,
+
+                            t.FRemark,
+
+                            t.FIsUrgent,
+
+                            s.FTaskType,
+
+                            s.FTaskTypeID,
+
+                            s.FMeasurementRange,
+
+                            s.FLevel,
+
+                            s.FSigPrice
+
+                        };
+
+                DataTable dt = LinqToDataTable.ToDataTable(r.ToList());
+
+                return dt;
+
+            }
+
+        }
+
+
+
+在向大家详细介绍Linq基本语法之前，首先让大家了解下调用Enumberalbe扩展函数，然后全面介绍Linq基本语法。
+
+Linq基本语法
+
+var result = from item in container orderby value ascending/descending select item; 1、获取全部记录
+
+var allCars = from c in myCars select c; 2、只获取字段名称
+
+var names = from c in myCars select c.PetName; 这里names就是隐式类型的变量。
+
+3、使用Enumerable.Distinct<T>()
+
+var makes = (from c in myCars select c.Make).Distinct<string>(); 4、即可以在定义的时候调用Enumberalbe扩展函数
+
+var names = from c in myCars select c.PetName;  foreach (var n in names)  {  Console.WriteLine("Name: {0}", n);  } 也可以在兼容的数组类型上调用
+
+var makes = from c in myCars select c.Make;  Console.WriteLine("Distinct makes:");  foreach (var m in makes.Distinct<string>())  {  Console.WriteLine("Make: {0}", m);  } 
+// Now get only the BMWs.  var onlyBMWs = from c in myCars where c.Make == "BMW" select c; 
+// Get BMWs going at least 100 mph.  var onlyFastBMWs = from c in myCars  where c.Make == "BMW" && c.Speed >= 100  select c; 5、生成新的数据类型（投影）
+
+var makesColors = from c in myCars select new {c.Make, c.Color}; 6、Reverse<T>()
+
+或者
+
+var subset = (from c in myCars select c).Reverse<Car>();  foreach (Car c in subset)  {  Console.WriteLine("{0} is going {1} MPH", c.PetName, c.Speed);  } 7、排序
+
+默认是ascending
+
+// Order all the cars by PetName.  var subset = from c in myCars orderby c.PetName select c;  // Now find the cars that are going less than 55 mph,  // and order by descending PetName  subset = from c in myCars  where c.Speed > 55 orderby c.PetName descending select c; 默认顺序时也可以明确指明
+
+var subset = from c in myCars  orderby c.PetName ascending select c; 8、Enumerable.Except()
+两个IEnumerable<T>兼容的对象的差集
+
+static void GetDiff()  {  List<string> myCars = new List<String> { "Yugo", "Aztec", "BMW"};  List<string> yourCars = new List<String> { "BMW", "Saab", "Aztec" };  var carDiff =(from c in myCars select c)  .Except(from c2 in yourCars select c2);  Console.WriteLine("Here is what you don't have, but I do:");  foreach (string s in carDiff)  Console.WriteLine(s); // Prints Yugo.  } 以上介绍Linq基本语法
+

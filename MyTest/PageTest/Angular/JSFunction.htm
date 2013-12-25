@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript">
+        function Product(id, description) 
+        {
+            this.getId = function () { return id; };
+            this.getDescription = function () { return description; }
+        }
+        var objProduct = new Product(100, 'aaaa');
+        console.log(objProduct.getId());
+        console.log(objProduct.getDescription());
+
+
+        function choiceQuestionCreator(spec) {    var my = {},that = questionCreator(spec, my);                // choice类型的renderInput实现    my.renderInput = function () {        var input = document.createElement('select');        var len = spec.choices.length;        for (var i = 0; i < len; i++) {            var option = document.createElement('option');            option.text = spec.choices[i];            option.value = spec.choices[i];            input.appendChild(option);        }        return input;    };    return that;}function inputQuestionCreator(spec) {    var my = {},that = questionCreator(spec, my);    // input类型的renderInput实现    my.renderInput = function () {        var input = document.createElement('input');        input.type = 'text';        return input;    };    return that;}
+    </script>
+</head>
+<body>
+
+</body>
+</html>

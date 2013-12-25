@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>弹出下拉菜单插件弹出层相对于自身的父层 - 懒人建站</title>
+<meta name="keywords" content="下拉菜单代码,导航条代码,css导航菜单,导航菜单代码" />
+<meta name="description" content="懒人建站为您提供-下拉菜单代码，css导航菜单代码，导航条代码，下拉菜单和下拉菜单代码。" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var lr_systembtn = $("div[name='lr_systembtn']");
+	var lr_menu = $("#lr_menu");
+	lr_systembtn.mouseenter(function(){
+		t_delay= setTimeout(function(){
+			lr_menu.fadeIn("slow");
+		},200);
+	});
+	lr_systembtn.mouseleave(function(){
+		clearTimeout(t_delay);
+		lr_menu.fadeOut("slow");
+	});
+
+});
+</script>
+<style>
+body{font-size:13px; font-family:"宋体"; color:#333333;}
+a{text-decoration: none; color:#333333; font-size:13px; font-family:"宋体";white-space:nowrap; overflow:hidden;}
+a:hover{color:#FB3822;}
+body,dl,dt,dd{ padding:0px; margin:0px;}
+/*懒人建站弹出菜单*/
+#lr_systembox{ width:980px; height:50px; background-color:#CCC; position:relative; margin:0 auto; z-index:100000;}
+.lr_systembtn{ width:201px; height:35px; line-height:33px;position:absolute; top:0px; right:0px; z-index:100004;}
+.lr_systembtn .lr_abtn{ width:100%; height:35px; display:block; font-size:15px; font-weight:bold;color:#666666;
+background-image: url(lr_images/btn_system.png);background-repeat:no-repeat;background-position:left top;}
+.lr_systembtn .lr_abtn:hover{color:#333333;background-position:left bottom;}
+.lr_systembtn .lr_abtn span{ padding-left:28px;}
+.lr_menu{ width:184px; padding:8px 6px 8px 6px; background-color:#ffffff; border:#ACACAC solid 2px;filter:alpha(opacity=90);opacity: 0.90;
+position:absolute; top:35px; right:0px;  z-index:100005;display:none;}
+.lr_menu dl{width:100%; display:block; overflow:hidden;}
+.lr_menu a{ width:100%;display:block; color:#666666;border-bottom:#ACACAC dashed 1px;height:30px; line-height:30px; font-size:14px;
+background-image: url(lr_images/jt1.gif);background-repeat:no-repeat;background-position:6px center;}
+.lr_menu a:hover{background-color:#E2E2E2; color:#333333; text-decoration:none;}
+.lr_menu dt{}
+.lr_menu dt a{font-weight:bold;text-indent:14px;}
+.lr_menu dd a{text-indent:24px;background-position:16px center;}
+</style>
+</head>
+
+<body>
+<div id="lr_systembox">
+
+    <div name="lr_systembtn" class="lr_systembtn">
+        <a href="#" class="lr_abtn"><span>懒人建站为您提供</span></a>
+        <div id="lr_menu" class="lr_menu">
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/js/" target="_blank">jquery特效</a></dt>
+          </dl>
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/js/nav/" target="_blank">导航菜单</a></dt>
+             <dd><a href="#" target="_blank">三级菜单测试</a></dd>
+             <dd><a href="#" target="_blank">三级菜单测试</a></dd>
+          </dl>   
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/js/slide/" target="_blank">焦点幻灯片</a></dt>
+          </dl>
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/js/texiao/" target="_blank">网页特效</a></dt>
+          </dl>
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/qqkefu/" target="_blank">qq在线客服代码</a></dt>
+          </dl>   
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/jquery_tanchu/" target="_blank">jquery弹出层</a></dt>
+          </dl>       
+        </div>
+    </div>
+    <div name="lr_systembtn" class="lr_systembtn">
+        <a href="#" class="lr_abtn"><span>懒人建站为您提供</span></a>
+        <div id="Div2" class="lr_menu">
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/js/" target="_blank">jquery特效</a></dt>
+          </dl>
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/js/nav/" target="_blank">导航菜单</a></dt>
+             <dd><a href="#" target="_blank">三级菜单测试</a></dd>
+             <dd><a href="#" target="_blank">三级菜单测试</a></dd>
+          </dl>   
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/js/slide/" target="_blank">焦点幻灯片</a></dt>
+          </dl>
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/js/texiao/" target="_blank">网页特效</a></dt>
+          </dl>
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/qqkefu/" target="_blank">qq在线客服代码</a></dt>
+          </dl>   
+          <dl>
+             <dt><a href="http://www.51xuediannao.com/jquery_tanchu/" target="_blank">jquery弹出层</a></dt>
+          </dl>       
+        </div>
+    </div>
+</div>
+
+
+<p>
+懒人建站说明：id="lr_systembox" 这个外层的父层是演示用的层，实际应用中你可以借用顶部或者是其他什么地方的div层，这个父层要设置相对定位，为了绝对定位里面的弹出菜单的位置。
+</p>
+<p>这个弹出下拉菜单插件弹出层相对于自身的父层jquery特效弹出下拉菜单效果，是懒人建站在一做学校网站的时候用的，需求要在中心校的下属学校的顶部都出现这个菜单，所以懒人建站就采用的灰色按钮（灰色可以搭配各种风格颜色^_^），考虑到不需要改动程序所以就利用原来的JS代码，用ajax的方式加载（以后只维护那个ajax加载的文件即可）。</p>
+
+<p>也许你会觉得懒人建站的弹出菜单结构有点复杂了，其实不然，dl dt dd结构是有后续考虑的比如要加三级菜单的时候，这种结构就会有一点用武之地了，懒人可以再添加dd标签</p>
+
+<p>懒人建站的拙作希望能帮助到像我一样的菜鸟，高手可以飘过自己写的。^_^</p>
+
+<!--下面只是说明与程序代码无关-->
+<div style="width:95%;display:block; font-size:10pt; line-height:150%; clear:both;">
+<span>本代码由<a href="http://www.51xuediannao.com" style="color:#F00;">懒人建站网 收集整理 我要学电脑.COM →51xuediannao.com</a> </span><br>
+<a href="http://www.51xuediannao.com/">懒人建站 http://www.51xuediannao.com/</a><br /><br/>
+<span> 、我们为您提供-
+<a href="http://www.51xuediannao.com/html+css/">html+css</a>，
+<a href="http://www.51xuediannao.com/">jquery特效</a>，
+<a href="http://www.51xuediannao.com/js/">JS代码</a>，
+<a href="http://www.51xuediannao.com/js/texiao/">网页特效</a>，
+<a href="http://www.51xuediannao.com/js/nav/">导航菜单</a>，
+<a href="http://www.51xuediannao.com/js/slide/">焦点幻灯片</a>，
+<a href="http://www.51xuediannao.com/qqkefu/">qq在线客服代码</a>
+<a href="http://www.51xuediannao.com/xuanxiangka/">选项卡代码</a>
+<a href="http://www.51xuediannao.com/jquery_tanchu/">jquery弹出层</a>
+</span> <br />
+<span>懒人建站只收录实用和能提高用户体验的代码</span><br />
+<span>懒人建站致力于解放您的部分写代码时间，提高您的工作效率！</span>
+</div>
+</body>
+</html>

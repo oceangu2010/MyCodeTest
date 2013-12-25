@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F1CB87FD-ADFB-4B5A-8B72-57295D99899D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FusionChartsTest</RootNamespace>
+    <AssemblyName>FusionChartsTest</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FusionCharts">
+      <HintPath>..\FusionChart\bin\FusionCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\FactoryDB.mdb" />
+    <Content Include="Default.aspx" />
+    <Content Include="FusionCharts\Area2D.swf" />
+    <Content Include="FusionCharts\Bar2D.swf" />
+    <Content Include="FusionCharts\Bubble.swf" />
+    <Content Include="FusionCharts\Column2D.swf" />
+    <Content Include="FusionCharts\Column3D.swf" />
+    <Content Include="FusionCharts\Data.xml" />
+    <Content Include="FusionCharts\Doughnut2D.swf" />
+    <Content Include="FusionCharts\Doughnut3D.swf" />
+    <Content Include="FusionCharts\FCExporter.swf" />
+    <Content Include="FusionCharts\firebug-lite.js" />
+    <Content Include="FusionCharts\FusionCharts.js" />
+    <Content Include="FusionCharts\FusionChartsExportComponent.js" />
+    <Content Include="FusionCharts\highcharts.js" />
+    <Content Include="FusionCharts\jquery.min.js" />
+    <Content Include="FusionCharts\Line.swf" />
+    <Content Include="FusionCharts\Marimekko.swf" />
+    <Content Include="FusionCharts\MSArea.swf" />
+    <Content Include="FusionCharts\MSBar2D.swf" />
+    <Content Include="FusionCharts\MSBar3D.swf" />
+    <Content Include="FusionCharts\MSColumn2D.swf" />
+    <Content Include="FusionCharts\MSColumn3D.swf" />
+    <Content Include="FusionCharts\MSColumn3DLineDY.swf" />
+    <Content Include="FusionCharts\MSColumnLine3D.swf" />
+    <Content Include="FusionCharts\MSCombi2D.swf" />
+    <Content Include="FusionCharts\MSCombi3D.swf" />
+    <Content Include="FusionCharts\MSCombiDY2D.swf" />
+    <Content Include="FusionCharts\MSLine.swf" />
+    <Content Include="FusionCharts\MSStackedColumn2D.swf" />
+    <Content Include="FusionCharts\MSStackedColumn2DLineDY.swf" />
+    <Content Include="FusionCharts\Pareto2D.swf" />
+    <Content Include="FusionCharts\Pareto3D.swf" />
+    <Content Include="FusionCharts\Pie2D.swf" />
+    <Content Include="FusionCharts\Pie3D.swf" />
+    <Content Include="FusionCharts\Scatter.swf" />
+    <Content Include="FusionCharts\ScrollArea2D.swf" />
+    <Content Include="FusionCharts\ScrollColumn2D.swf" />
+    <Content Include="FusionCharts\ScrollCombi2D.swf" />
+    <Content Include="FusionCharts\ScrollCombiDY2D.swf" />
+    <Content Include="FusionCharts\ScrollLine2D.swf" />
+    <Content Include="FusionCharts\ScrollStackedColumn2D.swf" />
+    <Content Include="FusionCharts\SSGrid.swf" />
+    <Content Include="FusionCharts\StackedArea2D.swf" />
+    <Content Include="FusionCharts\StackedBar2D.swf" />
+    <Content Include="FusionCharts\StackedBar3D.swf" />
+    <Content Include="FusionCharts\StackedColumn2D.swf" />
+    <Content Include="FusionCharts\StackedColumn2DLine.swf" />
+    <Content Include="FusionCharts\StackedColumn3D.swf" />
+    <Content Include="FusionCharts\StackedColumn3DLine.swf" />
+    <Content Include="FusionCharts\StackedColumn3DLineDY.swf" />
+    <Content Include="FusionCharts\ZoomLine.swf" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="WebForm1.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Content Include="BasePage\DbConn.cs" />
+    <Content Include="BasePage\FusionChartHelper.cs" />
+    <Content Include="BasePage\FusionCharts.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1446</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

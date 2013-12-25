@@ -1,0 +1,151 @@
+asp.net 数据库缓存依赖2012-02-21 13:06web.config文件
+
+
+  <connectionStrings>
+
+    <add name="ConnectionString" connectionString="Data Source=192.168.1.26;Database=xin;user id=sa;password=123456;Asynchronous Processing=true;max pool size=250"/>
+
+  </connectionStrings>
+
+
+
+  <system.web>
+
+ 
+
+    <caching>
+
+      <sqlCacheDependency enabled = "true" pollTime = "60000" >
+
+        <databases>
+
+          <add name="xin" connectionStringName="ConnectionString" pollTime="1200000"/>
+
+          <!--20分钟(1200000)轮询一次，这里以秒为单位的-->
+
+        </databases>
+
+      </sqlCacheDependency>
+
+    </caching>
+
+ 
+
+  </system.web>
+
+程序文件
+
+
+public partial class MyCacheSql : System.Web.UI.Page
+
+    {
+
+        protected void Page_Load(object sender, EventArgs e)
+
+        {
+
+            GridView1.DataSource = getData();
+
+            GridView1.DataBind();
+
+        }
+
+        /// <summary>
+
+        /// 获取缓存
+
+        /// </summary>
+
+        /// <returns></returns>
+
+        private DataTable getData()
+
+        {
+
+            string key = "tableParticipleQuotation";
+
+            var dt = HttpContext.Current.Cache[key] as DataTable;
+
+            if (dt == null)
+
+            {
+
+                dt = getParticipleTable();
+
+                SqlCacheDependencyAdmin.EnableTableForNotifications(App.DbHelperSQL.connectionString, "xin_Block");
+
+                SqlCacheDependency sqlDepend = new SqlCacheDependency("xin", "xin_Block");//注意这里的数据库xin要web.config里面配置的<add name="xin" connectionStringName="ConnectionString" pollTime="1200000"/>一致。
+
+                Cache.Insert(key, dt, sqlDepend);
+
+            }
+
+ 
+
+            return dt;
+
+        }
+
+        /// <summary>
+
+        /// 获取分词表的数据
+
+        /// </summary>
+
+        /// <returns></returns>
+
+        public virtual DataTable getParticipleTable()
+
+        {
+
+            DataTable dtTemp = new DataTable();
+
+            SqlConnection connection = new SqlConnection(App.DbHelperSQL.connectionString);
+
+            connection.Open();
+
+            SqlCommand command = new SqlCommand("proc_get_dict2", connection);
+
+            command.CommandType = CommandType.StoredProcedure;
+
+            SqlDataAdapter da = new SqlDataAdapter(command);
+
+            da.Fill(dtTemp);
+
+            return dtTemp;
+
+        }
+
+    }
+
+如果提示错误：
+
+
+The 'xin_Block' table in the database 'xin' is not enabled for SQL cache notification.
+
+Please make sure the table exists, and the table name used for cache dependency matches exactly the table name used in cache notification registration.
+
+To enable a table for SQL cache notification, please use SqlCacheDependencyAdmin.EnableTableForNotifications method, or the command line tool aspnet_regsql. To use the tool, please run 'aspnet_regsql.exe -?' for more information.
+
+To get a list of enabled tables in the database, please use SqlCacheDependencyManager.GetTablesEnabledForNotifications method, or the command line tool aspnet_regsql.exe.
+大小写是有区别的。什么意思呢？就是在执行aspnet_regsql的时候用到的表名或者数据库名要跟程序中用到的表名或者数据库名保持大小写一致，不然会出错。
+
+
+参考：
+
+aspnet_regsql -S <server> -U sa -P sa -d <database> -ed      启动数据库的数据缓存依赖功能
+
+
+aspnet_regsql -S <server> -U sa -P sa -d <database> -t <table> -et      启动数据表的数据缓存依赖功能
+
+根据自己的实际情况，写出如下代码：
+
+aspnet_regsql -S 192.168.1.26 -U sa -P 123456 -d xin -ed
+
+aspnet_regsql -S 192.168.1.26 -U sa -P 123456 -d xin -t xin_Block -et
+
+在数据库服务器上，打开Visual Studio命令执行窗口，或者打开cmd命令提示窗口，”\“反斜杠定位到C盘，然后定位到目录：c:\WINDOWS\Microsoft.NET\Framework\v2.0.50727，即aspnet_regsql.exe所在的目录，执行，就可以了。
+
+ 
+
+ 

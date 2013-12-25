@@ -1,0 +1,26 @@
+﻿使用方法
+public CommonJsonModel DeSerialize(string json)
+{
+    return new CommonJsonModel(json);
+}
+
+超级简单，只要new一个通用对象，把json字符串放进去就行了。
+
+针对上文的3个例子，我给出3种使用方法:
+{"total":0} 
+CommonJsonModel model = DeSerialize(json);
+
+model.GetValue("total") // return 0
+
+{"total":0,"data":{"377149574" : 1}}
+CommonJsonModel model = DeSerialize(json);
+
+model.GetModel("data").GetValue("377149574") //return 1
+
+{"total":0,"data":{"377149574":[{"cid":"377149574"}]}}
+CommonJsonModel model = DeSerialize(json);
+model.GetModel("data").GetCollection("377149574").GetCollection()[0].GetValue("cid") //return 377149574
+这个有点点复杂，
+1. 首先在data对象里面，377149574代表了一个集合，所以要用model.GetModel("data").GetCollection("377149574")把这个集合取出来。
+2. 其次这个集合里面包含了很多对象，因此用GetColllection()把这些对象取出来
+3. 在这些对象List里面取第一个[0]，表示取了":{"cid":"377149574"}这个对象，然后再用GetValue("cid"）把对象的值取出来。

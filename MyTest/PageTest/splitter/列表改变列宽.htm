@@ -1,0 +1,189 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<mce:script type="text/javascript" src="jquery-1.4.3.min.js" mce_src="jquery-1.4.3.min.js"></mce:script>
+<mce:style><!--
+.resizeDivClass
+{
+position:absolute;
+background-color:gray;
+width:2px;
+height:15px;
+z-index:1px;
+display: block;
+cursor:e-resize
+}
+.td1 {
+font-size: 12px;
+white-space:nowrap;
+color:#0000ff;  
+}
+--></mce:style><style mce_bogus="1">
+.resizeDivClass
+{
+position:absolute;
+background-color:gray;
+width:2px;
+height:15px;
+z-index:1px;
+display: block;
+cursor:e-resize
+}
+.td1 {
+font-size: 12px;
+white-space:nowrap;
+color:#0000ff;  
+}</style>
+<mce:script language=javascript><!--
+/*
+	标题：扩拖拽列表格demo 1.2
+	设计：卢松强
+	博客：http://hi.csdn.net/andensy
+	日期：2010年4月26日
+	说明：修改了firfox兼容性问题，可以很好的兼容火狐浏览器
+	*/
+	/*
+	依赖于jQuery
+	*/
+(function($){
+	//用正则表达式判断jQuery的版本
+	if (/1/.(0|1|2)/.(0|1|2|3|4|5)/.test($.fn.jquery) || /^1.1/.test($.fn.jquery)) {
+	 alert('movedTh 需要 jQuery v1.2.6 以后版本支持!  你正使用的是 v' + $.fn.jquery);
+    return;
+	}
+	me=null;
+	var ps=3;
+	$.fn.movedTh=function(){
+		me=this;
+		var target = null;
+		var tempStr = "";
+		var i=0;
+		$(me).find("tr:first").find("th").each(function(){
+		tempStr = '<div id="mydiv'+i+'"onmousedown="$().mousedone.movedown(event,this)"  ></div>';
+			var div={};
+			$(this).html($(this).html()+tempStr);
+			var offset = $(this).offset();
+			var pos=offset.left +$(this).width()+ me.offset().left-ps;
+			$("#mydiv"+i).addClass("resizeDivClass");
+			$("#mydiv"+i).css("left",pos);
+			$("#mydiv"+i).css("top",(offset.top+2));
+			i++;
+		});	//end each
+	}	//end moveTh
+	$.fn.mousedone={
+		movedown:function(e,obj){
+			var d=document;
+			var e = window.event||e ;
+			var myX = e.clientX||e.pageX;
+				obj.mouseDownX=myX ;
+				obj.pareneTdW=$(obj).parent().width();	//obj.parentElement.offsetWidth;
+				obj.pareneTableW=me.width();
+				if(obj.setCapture){
+					obj.setCapture();
+				}else if(window.captureEvents){ 
+					window.captureEvents(Event.MOUSEMOVE|Event.MOUSEUP); 
+				}
+			d.onmousemove=function(e){
+				var dragData=obj;
+				var event = window.event||e ;
+				if(!dragData.mouseDownX) return false;
+				var newWidth=dragData.pareneTdW*1+(event.clientX||event.pageX)*1-dragData.mouseDownX;
+					if(newWidth>0)
+					{
+						$(obj).parent().width(newWidth);
+						me.width(dragData.pareneTableW*1+(event.clientX||event.pageX)*1-dragData.mouseDownX);
+						var k=0;
+						me.find("tr:first").find("th").each(function(){
+						var offset = $(this).offset();
+						var pos=offset.left*1+$(this).width()*1+me.offset().left*1-ps;
+						$("#mydiv"+k).css("left",pos);
+						k++;
+						})	//end each
+					}//end if
+			};
+			d.onmouseup=function(e){
+				var dragData=obj;
+					if(dragData.setCapture)
+					{
+						dragData.releaseCapture();
+					}else if(window.captureEvents){
+	　　　　			window.releaseEvents(e.MOUSEMOVE|e.MOUSEUP);
+					}
+					dragData.mouseDownX=0;
+			}
+		}
+	}	//end mousedone
+	$(window).resize(function(){
+		setTimeout(function() { 
+		var target = null;
+		var tempStr = "";
+		var i=0;
+		$(me).find("tr:first").find("th").each(function(){
+		tempStr = '<div id="mydiv'+i+'"onmousedown="$().mousedone.movedown(event,this)"  ></div>';
+			var div={};
+			$(this).html($(this).html()+tempStr);
+			var offset = $(this).offset();
+			var pos=offset.left +$(this).width()+ me.offset().left-ps;
+			$("#mydiv"+i).addClass("resizeDivClass");
+			$("#mydiv"+i).css("left",pos);
+			i++;
+		});	//end each
+		}, 10);
+	});
+})(jQuery)
+$().ready(function(){
+	$("#tab").movedTh();
+})
+// --></mce:script>
+</head>
+<body onload="">
+<table cellpadding="3" id='' STYLE="table-layout:fixed;" mce_STYLE="table-layout:fixed;" >
+<tr bgcolor=cccccc >
+<th valign=top class="td1" ><nobr>改变table的列宽度改</nobr><span style="color:#069" mce_style="color:#069">|</span></th>
+<th valign=top class="td1" ><nobr>改变table的列宽度改</nobr><span style="color:#069" mce_style="color:#069">|</span></th>
+</tr></table>
+<br>
+<table cellpadding="3" id='tab' STYLE="table-layout:fixed;" mce_STYLE="table-layout:fixed;" >
+<tr bgcolor=cccccc >
+<th valign=top class="td1" ><nobr>改变table的列宽度改</nobr></th>
+<th valign=top class="td1" ><nobr>改变table的列宽度改</nobr></th>
+<th valign=top class="td1" ><nobr>改变table的列宽度改</nobr></th>
+<th valign=top class="td1" ><nobr>改变table的列宽度改</nobr></th>
+<th valign=top class="td1" ><nobr>改变table的列宽度改</nobr></th>
+<th valign=top class="td1" ><nobr>改变table的列宽度改</nobr></th>
+</tr>
+<tr>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+</tr>
+<tr>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+</tr>
+<tr>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+</tr>
+<tr>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+<td class="td1"><nobr>改变table的列宽度</nobr></td>
+</tr>
+</table>
+</body>
+</html>

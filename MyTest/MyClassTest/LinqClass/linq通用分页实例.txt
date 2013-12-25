@@ -1,0 +1,220 @@
+﻿           private void Form1_Load(object sender, EventArgs e)
+  2        {
+  3            Northwind db = new Northwind();          
+  4
+  5            //创建查询语句
+  6            var query = (from t1 in db.exClass
+  7                     join t2 in db.exClassCon                     
+  8                     on t1.ClassID equals t2.ClassID into it2
+  9                     orderby t1.ClassID descending
+ 10                     select new
+ 11                     {
+ 12                         t1,
+ 13                         count = it2.Count()
+ 14                     });
+ 15
+ 16            //实例化对象
+ 17            var datalist = DataList<object>.Create(query,               //查询语句
+ 18                new { t1 = (exClass)null, count = 0 },                  //定义一个相同结构的匿名空类
+ 19                1, 5);                                                  //页码和每页大小
+ 20            
+ 21            dataGridView1.DataSource = datalist.Value;
+ 22
+ 23            MessageBox.Show("当前页:" + datalist.IndexPage.ToString() + "\r\n" +
+ 24                "最大页:" + datalist.PageCount.ToString() + "\r\n" +
+ 25                "当前记录数:" + datalist.ThisPageRecordCount.ToString() + "\r\n" +
+ 26                "总记录数:" + datalist.AllRecordCount.ToString() + "\r\n" +
+ 27                "第一页:" + datalist.CanFirstPage.ToString() + "\r\n" +
+ 28                "上一页:" + datalist.CanPrevPage.ToString() + "\r\n" +
+ 29                "下一页:" + datalist.CanNextPage.ToString() + "\r\n" +
+ 30                "最后一页:" + datalist.CanLastPage.ToString() + "\r\n");
+ 31
+ 32        }
+ 33
+ 34        /**//// <summary>
+ 35        /// 数据列表
+ 36        /// </summary>
+ 37        /// <typeparam name="T">类型</typeparam>
+ 38        public class DataList<T> : IEnumerable
+ 39        {
+ 40            成员变量#region 成员变量
+ 41
+ 42            private System.Linq.IQueryable<T> query;
+ 43            private int allRecordCount;
+ 44            private int thisPageRecordCount;
+ 45            private int pageSize;
+ 46            private int pageCount;
+ 47            private int indexPage;
+ 48            private bool canFirstPage;
+ 49            private bool canPrevPage;
+ 50            private bool canNextPage;
+ 51            private bool canLastpage;
+ 52            private List<T> listValue;
+ 53
+ 54            #endregion
+ 55
+ 56            构造函数#region 构造函数
+ 57
+ 58            //私有构造函数，只能通过内部构造
+ 59            private DataList(System.Linq.IQueryable<T> Query, int IndexPage, int PageSize)
+ 60            {
+ 61                query = Query;
+ 62                indexPage = IndexPage;
+ 63                pageSize = PageSize;
+ 64
+ 65                Update();
+ 66            }
+ 67
+ 68            private DataList(System.Linq.IQueryable<T> Query)
+ 69                : this(Query, 1, 0) { }
+ 70
+ 71            #endregion
+ 72
+ 73            属性#region 属性
+ 74
+ 75            public int AllRecordCount
+ 76            {
+ 77                get { return allRecordCount; }
+ 78            }
+ 79
+ 80            public int ThisPageRecordCount
+ 81            {
+ 82                get { return thisPageRecordCount; }
+ 83            }
+ 84
+ 85            public int PageSize
+ 86            {
+ 87                get { return pageSize; }
+ 88                set { pageSize = value; }
+ 89            }
+ 90
+ 91            public int PageCount
+ 92            {
+ 93                get { return pageCount; }
+ 94            }
+ 95
+ 96            public int IndexPage
+ 97            {
+ 98                get { return indexPage; }
+ 99                set { indexPage = value; }
+100            }
+101
+102            public bool CanFirstPage
+103            {
+104                get { return canFirstPage; }
+105            }
+106
+107            public bool CanPrevPage
+108            {
+109                get { return canPrevPage; }
+110            }
+111
+112            public bool CanNextPage
+113            {
+114                get { return canNextPage; }
+115            }
+116
+117            public bool CanLastPage
+118            {
+119                get { return canLastpage; }
+120            }
+121
+122            public List<T> Value
+123            {
+124                get { return listValue; }
+125            }
+126
+127            #endregion
+128
+129            索引器#region 索引器
+130
+131            public T this[int index]
+132            {
+133                get { return listValue[index]; }
+134                set { listValue[index] = value; }
+135            }
+136
+137            #endregion
+138
+139            公开方法#region 公开方法
+140
+141            /**//// <summary>
+142            /// 创建自身实例
+143            /// </summary>
+144            /// <typeparam name="N">类型，如果此处为匿名类型，请用var 定义实体，且类后的T为object(其实什么也不重要，只是用于可以调用当前类的静态方法)</typeparam>
+145            /// <param name="Query">Linq查询语句</param>
+146            /// <param name="type">元素类型</param>
+147            /// <param name="IndexPage">开始页</param>
+148            /// <param name="PageSize">每页大小</param>
+149            /// <returns></returns>
+150            public static DataList<N> Create<N>(System.Linq.IQueryable Query, N type, int IndexPage, int PageSize)
+151            {
+152                System.Linq.IQueryable<N> query = (System.Linq.IQueryable<N>)Query;
+153                return new DataList<N>(query, IndexPage, PageSize);
+154            }
+155
+156            public static DataList<N> Create<N>(System.Linq.IQueryable Query, int IndexPage, int PageSize)
+157            {
+158                return Create<N>(Query, IndexPage, PageSize);
+159            }
+160
+161            /**//// <summary>
+162            /// 更新数据
+163            /// </summary>
+164            public virtual void Update()
+165            {
+166                allRecordCount = query.Count();
+167
+168                if (pageSize > 0)
+169                {
+170                    query = query.Skip((indexPage - 1) * pageSize).Take(pageSize);
+171
+172                    thisPageRecordCount = query.Count();
+173
+174                    //计算分页结果
+175                    pageCount = (allRecordCount % pageSize == 0) ? (allRecordCount / pageSize) : allRecordCount / pageSize + 1;
+176                    if (indexPage > 1) canFirstPage = true; canPrevPage = true;
+177                    if (indexPage < pageCount) canNextPage = true; canLastpage = true;
+178                }
+179                else
+180                {
+181                    thisPageRecordCount = allRecordCount;
+182                    pageCount = indexPage = 1;
+183                    canFirstPage = canPrevPage = canNextPage = canLastpage = false;
+184                }
+185
+186                listValue = query.ToList();
+187            }
+188
+189            /**//// <summary>
+190            /// 实现枚举接口，不过返回的是object
+191            /// </summary>
+192            /// <returns></returns>
+193            public IEnumerator GetEnumerator()
+194            {
+195                return listValue.GetEnumerator();
+196            }
+197
+198            #endregion
+199        }
+
+
+
+
+
+
+
+
+
+
+
+	      
+
+
+               protected　void　Page_Load(object　sender,　EventArgs　e)
+　　　　　　　　{
+　　　　　　　　　　　　NorthwindEntities　de　=　new　NorthwindEntities();
+　　　　　　　　　　　　BindingUtils　bind　=　new　BindingUtils();
+　　　　　　　　　　　　//先排序与一下再绑定
+　　　　　　　　　　　　bind.BindBoundControl<Customers>(de.Customers.OrderBy(v=>v.CustomerID),　this.GridView1,　10);　　
+　　　　　　　　}

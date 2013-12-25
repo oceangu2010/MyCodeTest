@@ -1,0 +1,54 @@
+﻿<!doctype html>
+<html ng-app>
+    <head>
+        <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
+        <script src="JS/script.js" type="text/javascript"></script>
+        <script type="text/javascript">
+
+            function MyController($scope) {
+                $scope.value = 12;
+            }
+//            angular.element(document);
+//            angular.bootstrap(document.documentElement);
+        </script>
+    </head>
+    <body>
+      <div>
+        Hello {{'World'}}!
+        <br />
+        <p ng-init=" name='Ocenagu2010' ">Hello {{name}}!</p>
+       </div>
+       <div ng-init="list = ['Chrome', 'Safari', 'Firefox', 'IE','Safar'] ">
+            <input ng-model="list" ng-list> <br>
+            <pre>list={{list}}</pre> <br>
+            <ol>
+            <li ng-repeat="item in list">
+              {{item}}
+            </li>
+            </ol>
+       </div>
+       <form name="myForm" ng-controller="MyController" action="">
+             Number: <input type="number" name="input" ng-model="value"
+                     min="0" max="99" required>
+           <span class="error" ng-show="myForm.input.$error.required">
+            Required!</span>
+          <span class="error" ng-show="myForm.input.$error.number">
+            Not valid number!</span>
+          <tt>value = {{value}}</tt><br/>
+          <tt>myForm.input.$valid = {{myForm.input.$valid}}</tt><br/>
+          <tt>myForm.input.$error = {{myForm.input.$error}}</tt><br/>
+          <tt>myForm.$valid = {{myForm.$valid}}</tt><br/>
+          <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br/>
+       </form>
+
+       <div ng-controller="RepeateController">
+         <ul>
+           <li ng-repeat="phone in phones">
+             <p>{{ phone.snippet }}</p>
+             <p>{{ phone.name }}</p>
+           </li>
+           
+         </ul>
+       </div>
+    </body>
+</html>

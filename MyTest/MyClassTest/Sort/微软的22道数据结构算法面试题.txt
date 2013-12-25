@@ -1,0 +1,390 @@
+﻿ 1、反转一个链表。循环算法。   
+    
+    
+    1     List   reverse(List   l)   {   
+    2     if(!l)   return   l;   
+    3         list   cur   =   l.next;   
+    4     list   pre   =   l;   
+    5     list   tmp;   
+    6     pre.next   =   null;   
+    7     while   (   cur   )   {   
+    8         tmp   =   cur;   
+    9         cur   =   cur.next;   
+  10         tmp.next   =   pre   
+  11         pre   =   tmp;   
+  12     }   
+  13     return   tmp;   
+  14   }   
+    
+  2、反转一个链表。递归算法。   
+    
+  1     List   resverse(list   l)   {   
+  2     if(!l   ||   !l.next)   return   l;   
+  3           
+  4         List   n   =   reverse(l.next);   
+  5         l.next.next   =   l;   
+  6         l.next=null;   
+  7     }   
+  8     return   n;   
+  9   }   
+    
+    
+  3、广度优先遍历二叉树。   
+    1     void   BST(Tree   t)   {   
+    2     Queue   q   =   new   Queue();   
+    3     q.enque(t);   
+    4     Tree   t   =   q.deque();       
+    5     while(t)   {   
+    6         System.out.println(t.value);   
+    7         q.enque(t.left);   
+    8         q.enque(t.right);   
+    9         t   =   q.deque();   
+  10     }   
+  11   }   
+  ----------------------   
+    1class   Node   {   
+    2     Tree   t;   
+    3     Node   next;   
+    4   }   
+    5class   Queue   {   
+    6     Node   head;   
+    7     Node   tail;   
+    8     public   void   enque(Tree   t){   
+    9         Node   n   =   new   Node();   
+  10         n.t   =   t;   
+  11         if(!tail){   
+  12             tail   =   head   =   n;   
+  13         }   else   {   
+  14         tail.next   =   n;   
+  15         tail   =   n;   
+  16         }   
+  17     }   
+  18     public   Tree   deque()   {   
+  19         if   (!head)   {   
+  20                 return   null;   
+  21         }   else   {   
+  22         Node   n   =   head;   
+  23         head   =   head.next;   
+  24       return   n.t;   
+  25         }   
+  26}   
+4、输出一个字符串所有排列。注意有重复字符。   
+    
+    1char[]   p;   
+    2void   perm(char   s[],   int   i,   int   n){   
+    3   int   j;   
+    4   char   temp;   
+    5   for(j=0;j<n;++j){   
+    6     if(j!=0   &&   s[j]==s[j-1]);   
+    7     elseif(s[j]!='@'){   
+    8       p[i]=s[j];   
+    9       s[j]='@';   
+  10       if(i==n-1){   
+  11         p[n]='\0';   
+  12         printf("%s",   p);   
+  13       }else{   
+  14         perm(s,i+1,n);   
+  15       }   
+  16       s[j]=p[i];   
+  17     }   
+  18   }   
+  19}   
+  --------------------------   
+  1void   main()   {   
+  2     char   s[N];   
+  3     sort(s);   
+  4     perm(s,0,strlen(s));   
+  5}   
+    
+    
+  5、输入一个字符串，输出长型整数。   
+    
+    1   long   atol(char   *str){   
+    2         char   *p   =   str;   
+    3         long   l=1;m=0;   
+    4         if   (*p=='-')   {   
+    5                 l=-1;   
+    6                 ++p;   
+    7         }   
+    8         while(isDigit(*p)){   
+    9                 m   =   m*10   +   p;   
+  10                 ++p;   
+  11         }   
+  12         if(!p)   return   m*l;   
+  13         else   return   error;   
+  14}   
+    
+    
+  6、判断一个链表是否有循环。   
+    
+  1       int     isLoop(List   l)     {   
+  2             if   (   !   l)     return       -   1   ;   
+  3           List   s     =     l.next;   
+  4               while   (s     &&     s   !=   l)       {   
+  5                   s     =     s.next;   
+  6           }     
+  7             if     (   !   s)     return       -   1   ;   
+  8             else     reutrn     1   ;   
+  9   }     
+  -----------   
+    1int   isLoop(List   l){   
+    2         if(!l)   return   0;   
+    3         p=l.next;   
+    4         wihle(p!=l&&p!=null)   {   
+    5                 l.next=l;   
+    6                 l=p;p=p.next;   
+    7         }   
+    8         if(p=l)   return   1;   
+    9         return   0;   
+  10}   
+  实际上，在我的面试过程中，还问到了不破坏结构的其他算法。   
+  我的答案是从链表头开始遍历，如果节点next指针指向自身，则循环存在；否则将next指针指向自身，遍历下一个节点。直至next指针为空，此时链表无循环。   
+    
+    
+  7、反转一个字符串。   
+    
+    1       void     reverse(   char       *   str)     {   
+    2             char     tmp;   
+    3             int     len;   
+    4           len     =     strlen(str);   
+    5               for   (   int     i   =   0   ;i   <   len   /   2   ;   ++   i)     {   
+    6                   tmp   =   char   [i];   
+    7                   str[i]     =     str[len   -   i   -   1   ];   
+    8                   str[len   -   i   -   1   ]   =   tmp;   
+    9           }     
+  10   }     
+    
+  8、实现strstr函数。   
+    
+    1int   strstr(char[]   str,   char[]   par){   
+    2         int   i=0;   
+    3         int   j=0;   
+    4         while(str[i]   &&   str[j]){   
+    5                 if(str[i]==par[j]){   
+    6                         ++i;   
+    7                         ++j;   
+    8                 }else{   
+    9                         i=i-j+1;   
+  10                         j=0;   
+  11                 }   
+  12         }   
+  13         if(!str[j])   return   i-strlen(par);   
+  14         else   return   -1;   
+  15} 
+
+9、实现strcmp函数。   
+    
+  1int   strcmp(char*   str1,   char*   str2){   
+  2         while(*str1   &&   *str2   &&   *str1==*str2){   
+  3                 ++str1;   
+  4                 ++str2;   
+  5         }   
+  6         return   *str1-*str2;   
+  7}   
+    
+    
+  10、求一个整形中1的位数。   
+    
+  1       int     f(   int     x)     {   
+  2             int     n   =   0   ;   
+  3               while   (x)     {   
+  4                     ++   n;   
+  5                   x   &=   x   -   1   ;   
+  6           }     
+  7             return     n;   
+  8   }     
+    
+    
+  11、汉诺塔问题。   
+    
+  1void   tower(n,x,y,z){   
+  2         if(n==1)   move(x,z);   
+  3         else   {   
+  4                 tower(n-1,   x,z,y);   
+  5                 move(x,z);   
+  6                 tower(n-1,   y,x,z);   
+  7         }   
+  8}   
+    
+    
+  12、三柱汉诺塔最小步数。   
+    
+    1       int     f3(n)     {   
+    2             if   (f3[n])     return     f3[n];   
+    3               else         {   
+    4                       if   (n   ==   1   )     {   
+    5                           f3[n]   =   1   ;   
+    6                             return       1   ;   
+    7                   }     
+    8                   f3[n]   =   2   *   f3(n   -   1   )   +   1   ;   
+    9                     return     f3[n];   
+  10           }     
+  11   }     
+    
+  四柱汉诺塔最小步数。   
+    1int   f4(n){   
+    2         if(f4[n]==0){   
+    3                 if(n==1)   {   
+    4                         f4[1]==1;   
+    5                         return   1;   
+    6                 }   
+    7                 min=2*f4(1)+f3(n-1);   
+    8                 for(int   i=2;i<n;++i){   
+    9                         u=2*f4(i)+f3(n-i);   
+  10                         if(u<min)   min=u;   
+  11                 }   
+  12                 f4[n]=min;   
+  13                 return   min;   
+  14         }   else   return   f4[n];   
+  15}   
+    
+    
+  13、在一个链表中删除另一个链表中的元素。   
+    
+    1void   delete(List   m,   List   n)   {   
+    2         if(!m   ||   !n)   return;   
+    3         List   pre   =   new   List();   
+    4         pre.next=m;   
+    5         List   a=m,   b=n,head=pre;   
+    6         while(a   &&   b){   
+    7                 if(a.value   <   b.value)   {   
+    8                         a=a.next;   
+    9                         pre=pre.next;   
+  10                 }else   if(a.value   >   b.value){   
+  11                         b=b.next;   
+  12                 }else{   
+  13                         a=a.next;   
+  14                         pre.next=a;   
+  15                 }   
+  16         }   
+  17         m=head.next;   
+  18} 
+
+ 14、一个数组，下标从0到n，元素为从0到n的整数。判断其中是否有重复元素。   
+    
+    1int   hasDuplicate(int[]   a,   int   n){   
+    2         for(int   i=0;i<n;++i){   
+    3                 while(a[i]!=i   &&   a[i]!=-1){   
+    4                         if(a[a[i]]==-1)   return   1;   
+    5                         a[i]=a[a[i]];   
+    6                         a[a[i]]=-1;   
+    7                 }   
+    8                 if(a[i]==i)   {a[i]=-1;}   
+    9         }   
+  10         return   0;   
+  11}   
+    
+    
+  15、判断一颗二叉树是否平衡。   
+    
+  1int   isB(Tree   t){   
+  2         if(!t)   return   0;   
+  3         int   left=isB(t.left);   
+  4         int   right=isB(t.right);   
+  5         if(   left   >=0   &&   right   >=0   &&   left   -   right   <=   1   ||   left   -right   >=-1)   
+  6                 return   (left<right)?   (right   +1)   :   (left   +   1);   
+  7         else   return   -1;   
+  8}   
+  9   
+    
+    
+  16、返回一颗二叉树的深度。   
+    
+  1int   depth(Tree   t){   
+  2         if(!t)   return   0;   
+  3         else   {   
+  4                 int   a=depth(t.right);   
+  5                 int   b=depth(t.left);   
+  6                 return   (a>b)?(a+1):(b+1);   
+  7         }   
+  8}   
+    
+    
+  17、两个链表，一升一降。合并为一个升序链表。   
+    
+    1       List   merge(List   a,   List   d)     {   
+    2           List   a1   =   reverse(d);   
+    3           List   p     =     q     =       new     List();   
+    4               while     (   a     &&     a1   )       {   
+    5                       if   (a.value   <   a1.value)     {   
+    6                           p.next   =   a;   
+    7                           a   =   a.next;   
+    8                     }       else         {   
+    9                           p.next   =   a1;   
+  10                           a1   =   a1.next;   
+  11                   }     
+  12                   p   =   p.next;   
+  13           }     
+  14             if   (a)   p.next     =     a;   
+  15           elseif(a1)   p.next   =   a1;   
+  16             return     q.next;   
+  17   }     
+    
+    
+  18、将长型转换为字符串。   
+    
+    1char*   ltoa(long   l){   
+    2         char[N]   str;     
+    3         int   i=1,n=1;   
+    4         while(!(l/i<10)){i*=10;++n}   
+    5         char*   str=(char*)malloc(n*sizeof(char));   
+    6         int   j=0;   
+    7         while(l){   
+    8                 str[j++]=l/i;   
+    9                 l=l%i;   
+  10                 i/=10;   
+  11         }   
+  12         return   str;   
+  13}   
+19、用一个数据结构实现   
+  1   if   (x   ==   0)   y   =   a;   
+  2   else   y   =   b;   
+    
+  1   j[]   =   {a,b};   
+  2   y=j[x];   
+    
+    
+  20、在双向链表中删除指定元素。   
+    
+    1void   del(List   head,   List   node){   
+    2         List   pre=new   List();   
+    3         pre.next   =   head;   
+    4         List   cur   =   head;   
+    5         while(cur   &&   cur!=node){   
+    6                 cur=cur.next;   
+    7                 pre=pre.next;   
+    8         }   
+    9         if(!cur)   return;   
+  10         List   post   =   cur.next;   
+  11         pre.next=cur.next;   
+  12         post.last=cur.last;   
+  13         return;   
+  14}   
+    
+  21、不重复地输出升序数组中的元素。   
+    
+    1       void     outputUnique(   char   []   str,   int     n)     {   
+    2             if   (n   <=   0   )     return   ;   
+    3           elseif(n   ==   1   )   putchar(str[   0   ]);   
+    4               else         {   
+    5                     int     i   =   0   ,j   =   1   ;   
+    6                   putchar(str[   0   ]);   
+    7                       while   (j   <   n)     {   
+    8                               if   (str[j]   !==   str[i])     {   
+    9                                   putchar(str[j]);   
+  10                                   i   =   j;   
+  11                           }     
+  12                             ++   j;   
+  13                   }     
+  14           }     
+  15   }     
+    
+    
+  22、面试过程中我还遇到了下面几题：   
+    
+  1、如何删除链表的倒数第m的元素？我的方法是先用pre指针从链表头开始步进m，新建pst节点next指针指向头节点，cur指针指向头节点，然后pre，cur，post三个指针一起步进，当pre指向链表结尾的时候cur指向倒数第m个元素，最后利用pst指针删除cur指向元素。   
+    
+  2、如何判断一个字符串是对称的？如a，aa，aba。设置头尾指针同时向中间比较靠齐直至相遇。   
+    
+  3、如何利用2函数找出一个字符串中的所有对称子串？以子串头指针和尾指针为循环变量设置两个嵌套的循环以找出所有子串，对每个子串应用2函数。
+

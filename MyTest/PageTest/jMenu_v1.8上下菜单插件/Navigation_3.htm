@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../../Scripts/jquery-1.7.min.js" type="text/javascript"></script>
+    <style type="text/css">
+body,ul,li{ margin:0; padding:0;}
+a{ text-decoration:none; color:#000;}
+ul{ list-style:none;}
+.nav_ul{ height:30px; margin:50px 0 0 50px;}
+.nav_ul li{ float:left; background-color:#6FF;}
+.nav_ul li a{ display:block; padding:4px 10px; border-right:1px solid #000;}
+.nav_ul li a:hover{ background-color:#030; color:#fff;}
+.nav_ul li ul{ position:absolute; visibility:hidden; width:150px;}
+.nav_ul li ul li{ clear:both; background-color:#9C0;border-bottom:1px solid #000;}
+.nav_ul li ul li a{ border-right:0; width:130px;}
+.nav_ul li ul ul{ left:100%; top:0;}
+.nav_ul li ul ul li{ background-color:#069;}
+.hover{ position:relative;}
+.clear{ clear:both;}
+</style>
+</head>
+<body>
+
+<ul class="nav_ul">
+    <li><a href="#">一级导航1</a>
+        <ul>
+            <li><a href="#">二级导航1-1</a></li>
+            <li><a href="#">二级导航1-2</a>
+                <ul>
+                    <li><a href="#">三级导航1-2-1</a></li>
+                    <li><a href="#">三级导航1-2-2</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><a href="#">一级导航2</a>
+        <ul>
+            <li><a href="#">二级导航2-1</a>
+                <ul>
+                    <li><a href="#">三级导航2-1-1</a></li>
+
+                    <li><a href="#">三级导航2-1-2</a></li>
+                </ul>
+            </li>
+            <li><a href="#">二级导航2-2</a></li>
+        </ul>
+    </li>
+</ul>
+</pre>
+<strong>js代码：</strong>
+<pre lang="javascript">
+$(document).ready(function(){
+    $("ul.nav_ul li").hover(
+    function(){
+        $(this).addClass("hover");
+        $("ul:first", this).css("visibility","visible");
+    },
+    function(event){
+        $(this).removeClass("hover");
+        $("ul:first", this).css("visibility","hidden");
+    })
+    $(".nav_ul li ul li:has(ul)").find("a:first").append(" >")
+})
+</body>
+</html>

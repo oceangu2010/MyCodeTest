@@ -1,0 +1,54 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery中的mouseenter和mouseleave事件</title>
+<style type="text/css">
+*{padding:0;margin:0; font-size:12px}
+ol,ul{list-style:none}
+.sns-func{ position:relative; margin:0 auto; width:200px; height:20px; line-height:20px; background-color:#999}
+.sns-func li.func-list{float:left; padding:0 8px;line-height:20px; font-family:"\5b8b\4f53"}
+.sns-func li.sns-setting{ border:1px solid #D1D6E2;padding:0 7px; border-bottom:none; background-color:#FFFFFF; position:relative; z-index:100 }
+.sns-func .sns-setting-box{position:absolute; top:20px; left:0px; width:66px; border:1px solid #CDCDCD; background-color:#FFFFFF; z-index:99;}
+.sns-func .sns-setting-box li.on a{background-color:#CFDDE3;}
+.sns-func .sns-setting-box a:link,.sns-func .sns-setting-box a:visited{ display:block; height:17px; color:#555555;text-decoration:none; padding:5px 0 0 7px; line-height:1}
+.sns-func .sns-setting-box a:hover{background-color:#CFDDE3;color:#555555;text-decoration:none;}
+</style>
+<script type="text/javascript" src="http://www.css88.com/tool/css3Preview/jquery-1.4.2.min.js"></script> 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#sel-down-w").mousemove(function () {
+            $(".sns-setting-box").slideDown().mouseleave(function () {
+                $(this).slideUp()
+            })
+        })
+    });
+</script> 
+</head>
+
+<body>
+<div class="sns-func">
+     <a href="http://www.sodao.com/app/lucky28/help1#" id="sel-down-w">设置</a>
+      <div class="sns-setting-box" id="divSetting" style="display:none">
+        <ul>
+            <li><a href="http://www.sodao.com/home/profile/baseinfo">个人资料</a></li>
+            <li><a href="http://www.sodao.com/home/privacy/basic">隐私设置</a></li>
+            <li><a href="http://www.sodao.com/home/privacy/dynamicFilter">动态过滤</a></li>
+            <li><a href="http://www.sodao.com/home/privacy/setEmail">邮件提醒</a></li>
+            <li><a href="http://www.sodao.com/home/profile/password">密码修改</a></li>
+        </ul>
+      </div>
+    </div>
+    <!--以下是统计代码--> 
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script> 
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-3448069-1");
+        pageTracker._trackPageview();
+    } catch (err) { }</script> 
+</body>
+</html>

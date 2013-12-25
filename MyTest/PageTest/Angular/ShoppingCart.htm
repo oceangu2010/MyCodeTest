@@ -1,0 +1,72 @@
+﻿<!doctype html>
+<html ng-app="myApp">
+<head>
+    <title>Shopping Cart Demo</title>
+      <script type="text/javascript" src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
+      <script type="text/javascript">
+         // alert("Are you Ok?");
+      </script>
+</head>
+<body ng-controller="ShoppingCtrl">
+     <h1>Your order</h1>
+
+      <div ng-repeat="item in items">
+      <span>{{item.title}}</span>
+      <input type="text" id="txtNumber" ng-model="item.quantity" />
+      <span>{{item.price | currency }}</span>
+      <span>{{item.price * item.quantity | currency}}</span>
+      <button ng-click="remove($index)">Remove</button>
+     <script type="text/javascript" charset="utf-8">
+         //如果针对某一个容器进行操作,则所有操作需要在同一个容器中
+         //脚本的位置不能随意放，一般一定要放在相应的容器下面
+        /*
+        var ShoppingCtrl = function ($scope) {
+            $scope.items =
+            [{ title: "Eggs", quantity: 8, price: 5.25 },
+            { title: "Chicken", quantity: 8, price: 5 },
+            { title: "Mike", quantity: 1, price: 58 },
+            { title: "Apple", quantity: 5, price: 10}];
+
+            $scope.remove = function ($index) {
+                $scope.items.splice($index, 1);
+            }
+
+        }*/
+        var myModel = angular.module("myApp", []);
+        myModel.controller("ShoppingCtrl", function ($scope) {
+            $scope.items =
+            [{ title: "Eggs", quantity: 8, price: 5.25 },
+            { title: "Chicken", quantity: 8, price: 5 },
+            { title: "Mike", quantity: 1, price: 58 },
+            { title: "Apple", quantity: 5, price: 10}];
+
+            $scope.remove = function ($index) {
+                $scope.items.splice($index, 1);
+            }
+        
+        });
+        angular.bootstrap(document.documentElement);
+
+        //定义一个扩展函数
+        ;(function () { } ());
+
+        var z = "0";
+        var a = 4;
+        var b= a | 2;//&& 取最小值 ||取最大值 ===相当于==
+        function test() {
+            if (z === "0")
+                alert(true);
+
+//            if (z == 0)
+//                alert(z);
+
+          alert(b);
+
+
+        }
+        test();
+     </script>
+
+  </div>
+</body>
+</html>
